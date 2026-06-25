@@ -1,5 +1,6 @@
 package com.uzunguc.financetracker.ui
 
+import com.uzunguc.financetracker.TypeOperation
 import java.math.BigDecimal
 import java.time.LocalDateTime
 
@@ -11,7 +12,4 @@ data class Operation(
     val date: LocalDateTime
 )
 
-enum class TypeOperation(val title: String) {
-    INCOME("Income"),
-    EXPENSE("Expense")
-}
+
