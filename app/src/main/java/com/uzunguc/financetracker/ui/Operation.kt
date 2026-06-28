@@ -9,7 +9,8 @@ data class Operation(
     val name: String,
     val sum: BigDecimal,
     val type: TypeOperation,
-    val date: LocalDateTime
+    val date: LocalDateTime,
+    val categoryId: Int? = null,
 )
 
 
