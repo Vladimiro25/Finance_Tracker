@@ -17,16 +17,16 @@ class CategoryRepositoryImpl(private val categoryDao: CategoryDao) : CategoryRep
         }
     }
 
-    override suspend fun addCategory(categoryEntity: Category): Long {
-        return categoryDao.addCategory(categoryEntity.toEntity())
+    override suspend fun addCategory(category: Category): Long {
+        return categoryDao.addCategory(category.toEntity())
     }
 
-    override suspend fun deleteCategory(id: Category) {
-        return categoryDao.deleteCategory(id.toEntity())
+    override suspend fun deleteCategory(category: Category) {
+        return categoryDao.deleteCategory(category.toEntity())
     }
 
-    override suspend fun updateCategory(id: Category) {
-        return categoryDao.updateCategory(id.toEntity())
+    override suspend fun updateCategory(category: Category) {
+        return categoryDao.updateCategory(category.toEntity())
     }
 
 }

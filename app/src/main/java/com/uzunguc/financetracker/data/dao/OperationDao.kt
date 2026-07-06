@@ -30,12 +30,12 @@ interface OperationDao {
     ): Flow<List<OperationEntity>>
 
     @Insert
-    suspend fun addTransaction(transaction: OperationEntity): Long
+    suspend fun addTransaction(operation: OperationEntity): Long
 
     @Delete
-    suspend fun deleteTransaction(id: OperationEntity)
+    suspend fun deleteTransaction(operation: OperationEntity)
 
     @Update
-    suspend fun updateTransaction(id: OperationEntity)
+    suspend fun updateTransaction(operation: OperationEntity)
 
 }

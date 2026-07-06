@@ -4,7 +4,7 @@ import com.uzunguc.financetracker.data.dao.OperationDao
 import com.uzunguc.financetracker.data.mapper.toDomain
 import com.uzunguc.financetracker.data.mapper.toEntity
 import com.uzunguc.financetracker.domain.repository.OperationRepository
-import com.uzunguc.financetracker.ui.Operation
+import com.uzunguc.financetracker.domain.model.Operation
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
@@ -23,15 +23,15 @@ class OperationRepositoryImpl(private val operationDao: OperationDao) : Operatio
         return operationDao.getTotalExpense()
     }
 
-    override suspend fun addTransaction(transaction: Operation): Long {
-        return operationDao.addTransaction(transaction.toEntity())
+    override suspend fun addTransaction(operation: Operation): Long {
+        return operationDao.addTransaction(operation.toEntity())
     }
 
-    override suspend fun deleteTransaction(id: Operation) {
-        return operationDao.deleteTransaction(id.toEntity())
+    override suspend fun deleteTransaction(operation: Operation) {
+        return operationDao.deleteTransaction(operation.toEntity())
     }
 
-    override suspend fun updateTransaction(id: Operation) {
-        return operationDao.updateTransaction(id.toEntity())
+    override suspend fun updateTransaction(operation: Operation) {
+        return operationDao.updateTransaction(operation.toEntity())
     }
 }

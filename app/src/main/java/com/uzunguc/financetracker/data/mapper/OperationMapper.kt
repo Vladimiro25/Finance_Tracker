@@ -2,7 +2,7 @@ package com.uzunguc.financetracker.data.mapper
 
 import com.uzunguc.financetracker.TypeOperation
 import com.uzunguc.financetracker.data.entity.OperationEntity
-import com.uzunguc.financetracker.ui.Operation
+import com.uzunguc.financetracker.domain.model.Operation
 import java.time.LocalDateTime
 
 fun Operation.toEntity(): OperationEntity{

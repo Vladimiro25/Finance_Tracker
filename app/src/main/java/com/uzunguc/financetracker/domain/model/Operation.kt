@@ -1,4 +1,4 @@
-package com.uzunguc.financetracker.ui
+package com.uzunguc.financetracker.domain.model
 
 import com.uzunguc.financetracker.TypeOperation
 import java.math.BigDecimal
@@ -12,5 +12,3 @@ data class Operation(
     val date: LocalDateTime,
     val categoryId: Int? = null,
 )
-
-
