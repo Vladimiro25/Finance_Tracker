@@ -1,5 +1,6 @@
 package com.uzunguc.financetracker.ui
 
+import com.uzunguc.financetracker.domain.model.Operation
 import java.math.BigDecimal
 
 data class HomeUiState(

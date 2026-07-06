@@ -15,11 +15,11 @@ interface CategoryDao {
     fun getAllCategories(): Flow<List<CategoryEntity>>
 
     @Insert
-    suspend fun addCategory(categoryEntity: CategoryEntity): Long
+    suspend fun addCategory(category: CategoryEntity): Long
 
     @Delete
-    suspend fun deleteCategory(id: CategoryEntity)
+    suspend fun deleteCategory(category: CategoryEntity)
 
     @Update
-    suspend fun updateCategory(id: CategoryEntity)
+    suspend fun updateCategory(category: CategoryEntity)
 }
