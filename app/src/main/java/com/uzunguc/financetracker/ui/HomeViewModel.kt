@@ -5,9 +5,10 @@ import androidx.lifecycle.ViewModel
 import com.uzunguc.financetracker.DateFilter
 import com.uzunguc.financetracker.delegate.DefaultMviDelegate
 import com.uzunguc.financetracker.mvi.MviController
+import javax.inject.Inject
 
 
-class HomeViewModel : ViewModel(), MviController<HomeUiState, HomeUiEvent> {
+class HomeViewModel @Inject constructor() : ViewModel(), MviController<HomeUiState, HomeUiEvent> {
     private val delegate = DefaultMviDelegate(HomeUiState())
     override val state = delegate.state
 
