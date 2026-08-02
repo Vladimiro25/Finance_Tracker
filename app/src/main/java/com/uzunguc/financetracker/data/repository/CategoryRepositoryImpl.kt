@@ -7,8 +7,9 @@ import com.uzunguc.financetracker.domain.model.Category
 import com.uzunguc.financetracker.domain.repository.CategoryRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import javax.inject.Inject
 
-class CategoryRepositoryImpl(private val categoryDao: CategoryDao) : CategoryRepository {
+class CategoryRepositoryImpl @Inject constructor(private val categoryDao: CategoryDao) : CategoryRepository {
     override fun getAllCategories(): Flow<List<Category>> {
         return categoryDao.getAllCategories().map { categoryList ->
             categoryList.map { categoryEntity ->
