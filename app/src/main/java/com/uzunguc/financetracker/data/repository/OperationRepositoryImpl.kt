@@ -7,20 +7,13 @@ import com.uzunguc.financetracker.domain.repository.OperationRepository
 import com.uzunguc.financetracker.domain.model.Operation
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import javax.inject.Inject
 
-class OperationRepositoryImpl(private val operationDao: OperationDao) : OperationRepository {
+class OperationRepositoryImpl @Inject constructor(private val operationDao: OperationDao) : OperationRepository {
     override fun getOperations(): Flow<List<Operation>> {
         return operationDao.getOperations().map {entityList ->
             entityList.map { entity -> entity.toDomain() }
         }
-    }
-
-    override suspend fun getTotalBalance(): Double? {
-        return operationDao.getTotalBalance()
-    }
-
-    override suspend fun getTotalExpense(): Double? {
-        return operationDao.getTotalExpense()
     }
 
     override suspend fun addTransaction(operation: Operation): Long {

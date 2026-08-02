@@ -6,8 +6,6 @@ import kotlinx.coroutines.flow.Flow
 interface OperationRepository {
 
     fun getOperations(): Flow<List<Operation>>
-    suspend fun getTotalBalance(): Double?
-    suspend fun getTotalExpense(): Double?
     suspend fun addTransaction(operation: Operation): Long
     suspend fun deleteTransaction(operation: Operation)
     suspend fun updateTransaction(operation: Operation)
