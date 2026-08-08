@@ -6,4 +6,5 @@ sealed class HomeUiEvent {
     object LoadHomeData : HomeUiEvent()
     data class SelectDateFilter(val filter: DateFilter) : HomeUiEvent()
     object AddTransactionClick : HomeUiEvent()
+    object ErrorShown : HomeUiEvent()
 }

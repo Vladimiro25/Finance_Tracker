@@ -35,6 +35,10 @@ class HomeViewModel @Inject constructor(
             is HomeUiEvent.SelectDateFilter -> {
                 filterData(filter = event.filter)
             }
+
+            HomeUiEvent.ErrorShown -> {
+                delegate.updateState { it.copy(error = null) }
+            }
         }
     }
 
