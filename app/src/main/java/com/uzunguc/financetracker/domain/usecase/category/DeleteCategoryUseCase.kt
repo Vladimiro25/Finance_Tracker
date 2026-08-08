@@ -2,7 +2,8 @@ package com.uzunguc.financetracker.domain.usecase.category
 
 import com.uzunguc.financetracker.domain.model.Category
 import com.uzunguc.financetracker.domain.repository.CategoryRepository
+import javax.inject.Inject
 
-class DeleteCategoryUseCase(private val repository: CategoryRepository) {
+class DeleteCategoryUseCase @Inject constructor(private val repository: CategoryRepository) {
     suspend operator fun invoke(category: Category) = repository.deleteCategory(category)
 }

@@ -1,4 +1,3 @@
 package com.uzunguc.financetracker.navigation
 
-class HomeNavigation {
-}
+// TODO: Step 10 — Navigation setup (NavHost, type-safe route objects).
