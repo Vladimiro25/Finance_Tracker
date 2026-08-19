@@ -1,7 +1,7 @@
-
 package com.uzunguc.financetracker.ui.compose
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -34,10 +34,13 @@ private val dateFormatter = DateTimeFormatter.ofPattern("HH:mm - MMMM d")
 fun TransactionItem(
     operation: Operation,
     amountText: String,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onClick: () -> Unit
 ) {
     Row(
-        modifier = modifier.fillMaxWidth(),
+        modifier = modifier
+            .fillMaxWidth()
+            .clickable { onClick() },
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
@@ -92,7 +95,8 @@ private fun TransactionItemPreview() {
                 type = TypeOperation.INCOME,
                 date = LocalDateTime.of(2026, 4, 30, 18, 27)
             ),
-            amountText = "$4,000.00"
+            amountText = "$4,000.00",
+            onClick = {}
         )
     }
 }

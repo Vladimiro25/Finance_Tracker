@@ -118,7 +118,8 @@ fun HomeScreen(
                         items(state.operations, key = { it.id }) { operation ->
                             TransactionItem(
                                 operation = operation,
-                                amountText = formatAmount(operation.sum)
+                                amountText = formatAmount(operation.sum),
+                                onClick = { onEvent(HomeUiEvent.TransactionClick(operation.id)) }
                             )
                             Spacer(Modifier.height(16.dp))
                         }

@@ -12,7 +12,9 @@ import com.uzunguc.financetracker.mvi.MviController
 import java.math.BigDecimal
 import javax.inject.Inject
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 
 
@@ -21,6 +23,9 @@ class HomeViewModel @Inject constructor(
 ) : ViewModel(), MviController<HomeUiState, HomeUiEvent> {
     private val delegate = DefaultMviDelegate(HomeUiState())
     override val state = delegate.state
+
+    private val _effect = Channel<HomeEffect>(Channel.BUFFERED)
+    val effect = _effect.receiveAsFlow()
 
     override fun sendEvent(event: HomeUiEvent) {
         when (event) {
@@ -38,6 +43,10 @@ class HomeViewModel @Inject constructor(
 
             HomeUiEvent.ErrorShown -> {
                 delegate.updateState { it.copy(error = null) }
+            }
+
+            is HomeUiEvent.TransactionClick -> {
+                viewModelScope.launch { _effect.send(HomeEffect.NavigateToTransactionDetails(event.operationId)) }
             }
         }
     }
