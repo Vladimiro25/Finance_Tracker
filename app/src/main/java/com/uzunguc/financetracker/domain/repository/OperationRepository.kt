@@ -9,4 +9,5 @@ interface OperationRepository {
     suspend fun addTransaction(operation: Operation): Long
     suspend fun deleteTransaction(operation: Operation)
     suspend fun updateTransaction(operation: Operation)
+    fun getTransactionById(id:Int): Flow<Operation?>
 }
