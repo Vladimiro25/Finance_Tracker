@@ -7,4 +7,7 @@ import kotlinx.serialization.Serializable
 object HomeRoute
 
 @Serializable
-data class TransactionDetailsRoute(val transactionId: Int)
+data class TransactionDetailsRoute(val operationId: Int)
+
+@Serializable
+object AddTransactionRoute
