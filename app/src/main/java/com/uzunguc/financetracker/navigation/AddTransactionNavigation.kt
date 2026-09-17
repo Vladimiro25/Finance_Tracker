@@ -9,31 +9,27 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.uzunguc.financetracker.FinanceTrackerApp
-import com.uzunguc.financetracker.ui.HomeEffect
-import com.uzunguc.financetracker.ui.HomeScreen
-import com.uzunguc.financetracker.ui.HomeViewModel
+import com.uzunguc.financetracker.ui.AddTransactionEffect
+import com.uzunguc.financetracker.ui.AddTransactionScreen
+import com.uzunguc.financetracker.ui.AddTransactionViewModel
 
 
 @Composable
-fun HomeNavigation(navController: NavController) {
+fun AddTransactionNavigation(navController: NavController) {
     val context = LocalContext.current
     val factory =
         remember { (context.applicationContext as FinanceTrackerApp).appComponent.daggerViewModelFactory() }
-    val viewModel: HomeViewModel = viewModel(factory = factory)
+    val viewModel: AddTransactionViewModel = viewModel(factory = factory)
     val state by viewModel.state.collectAsState()
 
     LaunchedEffect(Unit) {
         viewModel.effect.collect { effect ->
             when (effect) {
-                is HomeEffect.NavigateToTransactionDetails -> {
-                    navController.navigate(TransactionDetailsRoute(effect.operationId))
-                }
-
-                HomeEffect.NavigateToAddTransaction -> {
-                    navController.navigate(AddTransactionRoute)
+                AddTransactionEffect.NavigateBack -> {
+                    navController.popBackStack()
                 }
             }
         }
     }
-    HomeScreen(state = state, onEvent = viewModel::sendEvent)
+    AddTransactionScreen(state = state, onEvent = viewModel::sendEvent)
 }

@@ -38,8 +38,16 @@ fun GraphicsBalanceExpense(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            TotalBalance(balance = balance, color = MaterialTheme.colorScheme.onPrimary)
-            TotalExpense(balance = expense, color = MaterialTheme.colorScheme.error)
+            TotalBalance(
+                balance = balance,
+                color = MaterialTheme.colorScheme.onPrimary,
+                modifier = Modifier.weight(1f)
+            )
+            TotalExpense(
+                balance = expense,
+                color = MaterialTheme.colorScheme.error,
+                modifier = Modifier.weight(1f)
+            )
         }
 
         Spacer(Modifier.height(12.dp))

@@ -29,4 +29,7 @@ interface OperationDao {
     @Update
     suspend fun updateTransaction(operation: OperationEntity)
 
+    @Query("SELECT * FROM OperationEntity WHERE id = :id")
+    fun getTransactionById(id: Int): Flow<OperationEntity?>
+
 }

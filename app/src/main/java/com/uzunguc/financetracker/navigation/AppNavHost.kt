@@ -5,6 +5,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.toRoute
 
 @Composable
 fun AppNavHost(navController: NavHostController, modifier: Modifier) {
@@ -16,8 +17,12 @@ fun AppNavHost(navController: NavHostController, modifier: Modifier) {
         composable<HomeRoute> {
             HomeNavigation(navController)
         }
-        composable<TransactionDetailsRoute> {
-
+        composable<TransactionDetailsRoute> { backStackEntry ->
+            val route = backStackEntry.toRoute<TransactionDetailsRoute>()
+            TransactionDetailsNavigation(navController, route.operationId)
+        }
+        composable<AddTransactionRoute> {
+            AddTransactionNavigation(navController)
         }
     }
 }

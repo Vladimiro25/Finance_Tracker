@@ -30,7 +30,7 @@ class HomeViewModel @Inject constructor(
     override fun sendEvent(event: HomeUiEvent) {
         when (event) {
             HomeUiEvent.AddTransactionClick -> {
-                TODO("Navigate to add transaction screen")
+                viewModelScope.launch { _effect.send(HomeEffect.NavigateToAddTransaction) }
             }
 
             HomeUiEvent.LoadHomeData -> {
