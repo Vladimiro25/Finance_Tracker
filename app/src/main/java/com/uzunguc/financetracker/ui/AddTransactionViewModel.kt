@@ -10,8 +10,11 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
+import java.math.BigDecimal
 import java.time.LocalDateTime
 import javax.inject.Inject
+
+private val MAX_AMOUNT = BigDecimal("999999999.99")
 
 class AddTransactionViewModel @Inject constructor(
     private val addTransactionUseCase: AddTransactionUseCase,
@@ -55,9 +58,13 @@ class AddTransactionViewModel @Inject constructor(
         val current = state.value
         val sum = current.amount.toBigDecimalOrNull()
         val nameError = if (current.name.isBlank()) "Name is required" else null
-        val amountError = if (sum == null) "Enter a valid amount" else null
+        val amountError = when {
+            sum == null -> "Enter a valid amount"
+            sum > MAX_AMOUNT -> "Amount is too large"
+            else -> null
+        }
 
-        if (sum == null || nameError != null) {
+        if (sum == null || amountError != null || nameError != null) {
             delegate.updateState { it.copy(nameError = nameError, amountError = amountError) }
             return
         }

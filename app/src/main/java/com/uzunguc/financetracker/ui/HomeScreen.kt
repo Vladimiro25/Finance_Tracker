@@ -37,6 +37,7 @@ import com.uzunguc.financetracker.ui.compose.TransactionItem
 import com.uzunguc.financetracker.ui.compose.WelcomeBar
 import com.uzunguc.financetracker.ui.theme.FinanceTrackerTheme
 import java.math.BigDecimal
+import java.math.RoundingMode
 import java.text.NumberFormat
 import java.util.Locale
 
@@ -148,8 +149,27 @@ fun HomeScreen(
     }
 }
 
+private val COMPACT_THRESHOLD = BigDecimal(1_000_000)
+
 private fun formatAmount(amount: BigDecimal): String =
-    NumberFormat.getCurrencyInstance(Locale.US).format(amount)
+    if (amount.abs() >= COMPACT_THRESHOLD) {
+        formatCompactAmount(amount)
+    } else {
+        NumberFormat.getCurrencyInstance(Locale.US).format(amount)
+    }
+
+// NumberFormat.getCompactNumberInstance needs API 30, minSdk is 28 — format by hand
+private fun formatCompactAmount(amount: BigDecimal): String {
+    val abs = amount.abs()
+    val (divisor, suffix) = when {
+        abs >= BigDecimal(1_000_000_000_000L) -> BigDecimal(1_000_000_000_000L) to "T"
+        abs >= BigDecimal(1_000_000_000L) -> BigDecimal(1_000_000_000L) to "B"
+        else -> COMPACT_THRESHOLD to "M"
+    }
+    val value = abs.divide(divisor, 1, RoundingMode.HALF_UP)
+    val sign = if (amount.signum() < 0) "-" else ""
+    return "$sign\$$value$suffix"
+}
 
 @PreviewLightDark
 @Composable
